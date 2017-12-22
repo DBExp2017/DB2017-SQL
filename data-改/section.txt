@@ -1,0 +1,13 @@
+SEC_ID        SEMESTER        YEAR        COURSE_ID      BUILDING        ROOM_NUMBER    TIME_SLOT   
+05             02              12            01          JINGXIN         102 
+03             02              13            02          JINGXIN         103
+07             02              14            03          JINGXIN         104            
+12             01              15            23          WULI            201
+08             02              13            45          JINGXIN         303
+12             02              12            33          JINGXIN         304
+23             02              13            14          JISUANJI        108
+25             01              15            60          JINGXIN         301
+33             01              15            70          LISIGUANG       404
+46             01              14            44          WAIYU           101
+09             02              12            34          LISIGUANG       501
+18             01              14            35          YIFU            301

@@ -1,0 +1,13 @@
+COURSE_ID        TITLE                 CREDITS        DEPT_NAME
+01               MATH A1                               MATH
+02               CALCULUS                              MATH
+03               GEOMETRY                              MATH
+23               BASIC PHYSICS A1                      PHYSICAL
+45               FOREIGN LITERTURE A3                  CHINESE
+33               QUANTUM PHYSICS                       PHYSICAL
+14               LANGUAGE C                            COMPUTER
+60               INTERNATIONAL FINANCE                 FINANCAL
+70               WESTERN PHILOSOPHY                    PHILOSOPHY
+44               ENGLISH A4                            ENGLISH
+34               BASKETBALL                            PE
+35               ORGANIC CHEMISTRY                     CHEMISTRY

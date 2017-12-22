@@ -1,0 +1,10 @@
+DEPT_NAME           BUILDING          BUDGET
+MATH                JINGXIN           10000
+PHYSICAL            WULI              9000
+CHINESE             JINGXIN           1500
+COMPUTER            JISUANJI          23000
+FINANCIAL           JINGXIN           40000
+PHILOSOPHY          LISIGUANG         1100
+ENGLISH             WAIYU             3300
+PE                  LISIGUANG         500
+CHEMISTRY           YIFU              33000

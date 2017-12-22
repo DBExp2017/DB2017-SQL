@@ -1,0 +1,13 @@
+BUILDING         ROOM_NUM       CAPACITY
+JINGXIN          102            200
+JINGXIN          103            200
+JINGXIN          104            200
+WULI             201            200
+JINGXIN          303            300
+JINGXIN          304            300
+JISUANJI         108            300
+JINGXIN          301            200
+LISIGUANG        404            100
+WAIYU            101            60
+LISIGUANG        501            200
+YIFU             301            200
