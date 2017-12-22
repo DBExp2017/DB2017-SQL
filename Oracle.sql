@@ -1,0 +1,217 @@
+DROP TABLE "advisor" CASCADE CONSTRAINTS
+;
+
+DROP TABLE "classroom" CASCADE CONSTRAINTS
+;
+
+DROP TABLE "course" CASCADE CONSTRAINTS
+;
+
+DROP TABLE "department" CASCADE CONSTRAINTS
+;
+
+DROP TABLE "instructor" CASCADE CONSTRAINTS
+;
+
+DROP TABLE "section" CASCADE CONSTRAINTS
+;
+
+DROP TABLE "student" CASCADE CONSTRAINTS
+;
+
+DROP TABLE "takes" CASCADE CONSTRAINTS
+;
+
+DROP TABLE "teaches" CASCADE CONSTRAINTS
+;
+
+CREATE TABLE "advisor"
+(
+	"S_ID" VARCHAR2(50),
+	"T_ID" VARCHAR2(50)
+)
+;
+
+CREATE TABLE "classroom"
+(
+	"BUILDING" VARCHAR2(50) NOT NULL,
+	"ROOM_NUM" VARCHAR2(50) NOT NULL,
+	"CAPACITY" NUMBER(4)
+)
+;
+
+CREATE TABLE "course"
+(
+	"COURSE_ID" VARCHAR2(50) NOT NULL,
+	"TITLE" VARCHAR2(50),
+	"CREDITS" NUMBER(2),
+	"DEPT_NAME" VARCHAR2(50)
+)
+;
+
+CREATE TABLE "department"
+(
+	"DEPT_NAME" VARCHAR2(50) NOT NULL,
+	"BUILDING" VARCHAR2(50)
+)
+;
+
+CREATE TABLE "instructor"
+(
+	"ID" VARCHAR2(50) NOT NULL,
+	"NAME" VARCHAR2(50),
+	"DEPT_NAME" VARCHAR2(50),
+	"SALARY" NUMBER(8,2),
+	"PASSWORD" VARCHAR2(50)
+)
+;
+
+CREATE TABLE "section"
+(
+	"SEC_ID" VARCHAR2(50) NOT NULL,
+	"SEMESTER" VARCHAR2(50) NOT NULL,
+	"YEAR" NUMBER(4) NOT NULL,
+	"COURSE_ID" VARCHAR2(50) NOT NULL,
+	"BUILDING" VARCHAR2(50),
+	"ROOM_NUMBER" VARCHAR2(50),
+	"TIME_SLOT" VARCHAR2(50),
+	"ROOM_NUM" VARCHAR2(50)
+)
+;
+
+CREATE TABLE "student"
+(
+	"ID" VARCHAR2(50) NOT NULL,
+	"NAME" VARCHAR2(50),
+	"DEPT_NAME" VARCHAR2(50),
+	"TOT_CRED" NUMBER(8,1),
+	"PASSWORD" VARCHAR2(50)
+)
+;
+
+CREATE TABLE "takes"
+(
+	"COURSE_ID" VARCHAR2(50),
+	"SEC_ID" VARCHAR2(50),
+	"SEMESTER" VARCHAR2(50),
+	"YEAR" NUMBER(4),
+	"GRADE" VARCHAR2(50),
+	"ID" VARCHAR2(50)
+)
+;
+
+CREATE TABLE "teaches"
+(
+	"ID" VARCHAR2(50),
+	"COURSE_ID" VARCHAR2(50),
+	"SEC_ID" VARCHAR2(50),
+	"SEMESTER" VARCHAR2(50),
+	"YEAR" NUMBER(4)
+)
+;
+
+ALTER TABLE "classroom" 
+ ADD CONSTRAINT "PK_classroom"
+	PRIMARY KEY ("BUILDING","ROOM_NUM") USING INDEX
+;
+
+CREATE INDEX "IXFK_course_department"   
+ ON "course" ("DEPT_NAME") 
+;
+
+ALTER TABLE "course" 
+ ADD CONSTRAINT "PK_course"
+	PRIMARY KEY ("COURSE_ID") USING INDEX
+;
+
+ALTER TABLE "department" 
+ ADD CONSTRAINT "PK_department"
+	PRIMARY KEY ("DEPT_NAME") USING INDEX
+;
+
+CREATE INDEX "IXFK_instructor_department"   
+ ON "instructor" ("DEPT_NAME") 
+;
+
+ALTER TABLE "instructor" 
+ ADD CONSTRAINT "PK_teacher"
+	PRIMARY KEY ("ID") USING INDEX
+;
+
+CREATE INDEX "IXFK_section_classroom"   
+ ON "section" ("BUILDING","ROOM_NUM") 
+;
+
+CREATE INDEX "IXFK_section_course"   
+ ON "section" ("COURSE_ID") 
+;
+
+ALTER TABLE "section" 
+ ADD CONSTRAINT "PK_section_time_slot"
+	PRIMARY KEY ("SEC_ID","COURSE_ID","YEAR","SEMESTER") USING INDEX
+;
+
+CREATE INDEX "IXFK_student_department"   
+ ON "student" ("DEPT_NAME") 
+;
+
+ALTER TABLE "student" 
+ ADD CONSTRAINT "PK_student"
+	PRIMARY KEY ("ID") USING INDEX
+;
+
+CREATE INDEX "IXFK_takes_section"   
+ ON "takes" ("SEC_ID","COURSE_ID","YEAR","SEMESTER") 
+;
+
+CREATE INDEX "IXFK_takes_student"   
+ ON "takes" ("ID") 
+;
+
+CREATE INDEX "IXFK_teaches_instructor"   
+ ON "teaches" ("ID") 
+;
+
+CREATE INDEX "IXFK_teaches_section"   
+ ON "teaches" ("SEC_ID","COURSE_ID","YEAR","SEMESTER") 
+;
+
+ALTER TABLE "course" 
+ ADD CONSTRAINT "FK_course_department"
+	FOREIGN KEY ("DEPT_NAME") REFERENCES "department" ("DEPT_NAME")
+;
+
+ALTER TABLE "instructor" 
+ ADD CONSTRAINT "FK_instructor_department"
+	FOREIGN KEY ("DEPT_NAME") REFERENCES "department" ("DEPT_NAME")
+;
+
+ALTER TABLE "section" 
+ ADD CONSTRAINT "FK_section_classroom"
+	FOREIGN KEY ("BUILDING","ROOM_NUM") REFERENCES "classroom" ("BUILDING","ROOM_NUM")
+;
+
+ALTER TABLE "student" 
+ ADD CONSTRAINT "FK_student_department"
+	FOREIGN KEY ("DEPT_NAME") REFERENCES "department" ("DEPT_NAME")
+;
+
+ALTER TABLE "takes" 
+ ADD CONSTRAINT "FK_takes_section"
+	FOREIGN KEY ("SEC_ID","COURSE_ID","YEAR","SEMESTER") REFERENCES "section" ("SEC_ID","COURSE_ID","YEAR","SEMESTER")
+;
+
+ALTER TABLE "takes" 
+ ADD CONSTRAINT "FK_takes_student"
+	FOREIGN KEY ("ID") REFERENCES "student" ("ID")
+;
+
+ALTER TABLE "teaches" 
+ ADD CONSTRAINT "FK_teaches_instructor"
+	FOREIGN KEY ("ID") REFERENCES "instructor" ("ID")
+;
+
+ALTER TABLE "teaches" 
+ ADD CONSTRAINT "FK_teaches_section"
+	FOREIGN KEY ("SEC_ID","COURSE_ID","YEAR","SEMESTER") REFERENCES "section" ("SEC_ID","COURSE_ID","YEAR","SEMESTER")
+;
